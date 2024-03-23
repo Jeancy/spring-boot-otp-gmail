@@ -16,11 +16,17 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
   @Autowired
-  private OtpUtil otpUtil;
+  private final OtpUtil otpUtil;
   @Autowired
-  private EmailUtil emailUtil;
+  private final EmailUtil emailUtil;
   @Autowired
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
+  
+  public UserService(OtpUtil otpUtil, EmailUtil emailUtil,UserRepository userRepository ){
+      this.otpUtil = otpUtil;
+      this.emailUtil = emailUtil;
+      this.userRepository = userRepository;
+  }
 
   public String register(RegisterDto registerDto) {
     String otp = otpUtil.generateOtp();
